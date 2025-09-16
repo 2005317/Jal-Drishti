@@ -91,9 +91,9 @@ export default function FarmerDashboard() {
           <CardContent className="grid grid-cols-2 gap-4">
             {quickActions.map(action => (
               <Link href={action.href} key={action.title}>
-                <Button variant="outline" className="w-full h-20 flex-col gap-2 bg-transparent hover:bg-primary/10 transition-all hover:scale-105">
+                <Button variant="outline" className="w-full h-24 flex-col gap-2 bg-transparent hover:bg-primary/10 transition-all hover:scale-105 p-2">
                   {action.icon}
-                  <span className="text-xs text-center">{action.title}</span>
+                  <span className="text-xs text-center leading-tight">{action.title}</span>
                 </Button>
               </Link>
             ))}
