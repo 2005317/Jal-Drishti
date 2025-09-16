@@ -28,11 +28,12 @@ export function Header() {
   const currentRole = ROLES.find(r => r.value === role);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-card/80 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/30 backdrop-blur-lg">
       <div className="container flex h-16 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link href="/dashboard">
+        <div className="mr-6 hidden md:flex">
+          <Link href="/dashboard" className="flex items-center gap-2">
             <Logo />
+            <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">Jal Drishti</span>
           </Link>
         </div>
         
@@ -44,7 +45,7 @@ export function Header() {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[300px]">
+            <SheetContent side="left" className="w-[300px] bg-background/80 backdrop-blur-xl border-r-white/10">
               <nav className="flex flex-col gap-4 p-4">
                 <Link href="/dashboard" className="mb-4">
                   <Logo />
@@ -54,13 +55,13 @@ export function Header() {
                     key={href}
                     href={href}
                     className={cn(
-                      "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium",
+                      "flex items-center gap-2 rounded-md px-3 py-2 text-base font-medium transition-colors",
                       pathname === href
                         ? 'bg-primary text-primary-foreground'
-                        : 'text-muted-foreground hover:bg-muted'
+                        : 'text-foreground/70 hover:text-foreground hover:bg-white/5'
                     )}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-5 w-5" />
                     {t(labelKey)}
                   </Link>
                 ))}
@@ -69,14 +70,14 @@ export function Header() {
           </Sheet>
         </div>
 
-        <nav className="hidden items-center space-x-6 text-sm font-medium md:flex">
-          {navLinks.map(({ href, labelKey, icon: Icon }) => (
+        <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
+          {navLinks.map(({ href, labelKey }) => (
             <Link
               key={href}
               href={href}
               className={cn(
-                'flex items-center gap-1 transition-colors hover:text-primary',
-                pathname === href ? 'text-primary' : 'text-muted-foreground'
+                'transition-colors hover:text-primary',
+                pathname === href ? 'text-primary font-semibold' : 'text-foreground/60'
               )}
             >
               {t(labelKey)}
@@ -87,18 +88,18 @@ export function Header() {
         <div className="flex flex-1 items-center justify-end space-x-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-40 justify-start">
-                {currentRole && <currentRole.icon className="mr-2 h-4 w-4" />}
+              <Button variant="outline" className="w-40 justify-start bg-transparent text-foreground hover:bg-white/5 hover:text-white">
+                {currentRole && <currentRole.icon className="mr-2 h-4 w-4 text-primary/80" />}
                 {currentRole?.label}
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="bg-background/80 backdrop-blur-xl border-white/10 text-foreground">
               <DropdownMenuLabel>{t('selectRole')}</DropdownMenuLabel>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-white/10" />
               <DropdownMenuRadioGroup value={role} onValueChange={(value) => setRole(value as any)}>
                 {ROLES.map(({ value, label, icon: Icon }) => (
-                  <DropdownMenuRadioItem key={value} value={value} className="cursor-pointer">
-                    <Icon className="mr-2 h-4 w-4" />
+                  <DropdownMenuRadioItem key={value} value={value} className="cursor-pointer focus:bg-white/10">
+                    <Icon className="mr-2 h-4 w-4 text-primary/80" />
                     {label}
                   </DropdownMenuRadioItem>
                 ))}
@@ -108,14 +109,14 @@ export function Header() {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" className="bg-transparent text-foreground hover:bg-white/5 hover:text-white">
                 <Languages className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="bg-background/80 backdrop-blur-xl border-white/10 text-foreground">
                <DropdownMenuRadioGroup value={language} onValueChange={(value) => setLanguage(value as any)}>
                 {LANGUAGES.map(({ value, label }) => (
-                  <DropdownMenuRadioItem key={value} value={value} className="cursor-pointer">
+                  <DropdownMenuRadioItem key={value} value={value} className="cursor-pointer focus:bg-white/10">
                     {label}
                   </DropdownMenuRadioItem>
                 ))}

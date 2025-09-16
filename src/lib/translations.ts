@@ -16,6 +16,7 @@ export const translations: Translations = {
   
   // Public Dashboard
   groundwaterHealth: { en: 'Groundwater Health', hi: 'भूजल स्वास्थ्य' },
+  publicIntro: { en: 'Monitor real-time groundwater levels and health status in your area. Select a level to see detailed information.', hi: 'अपने क्षेत्र में वास्तविक समय में भूजल स्तर और स्वास्थ्य की स्थिति की निगरानी करें। विस्तृत जानकारी देखने के लिए एक स्तर चुनें।'},
   villageLevel: { en: 'Village Level', hi: 'ग्राम स्तर' },
   districtLevel: { en: 'District Level', hi: 'जिला स्तर' },
   status: { en: 'Status', hi: 'स्थिति' },
