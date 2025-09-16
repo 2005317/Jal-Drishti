@@ -28,7 +28,7 @@ export default function ConservationTipsPage() {
         },
     ];
   return (
-    <div className="container py-8">
+    <div className="container py-8 animate-fade-in-up">
       <div className="mb-8 text-center">
         <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">{t('tipsTitle')}</h1>
         <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
@@ -37,7 +37,7 @@ export default function ConservationTipsPage() {
       </div>
       <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
         {tips.map((tip, index) => (
-          <Card key={index} className="glass-card group hover:border-primary/50 transition-all">
+          <Card key={index} className="glass-card group hover:border-primary/50 transition-all duration-300 hover:scale-105">
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-4">

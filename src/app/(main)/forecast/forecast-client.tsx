@@ -94,7 +94,7 @@ export default function ForecastClient({ forecastAction, explainAction }: Foreca
   };
 
   return (
-    <div className="container py-8">
+    <div className="container py-8 animate-fade-in-up">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">{t('aiForecast')}</h1>
@@ -145,7 +145,7 @@ export default function ForecastClient({ forecastAction, explainAction }: Foreca
         )}
 
         {forecastResult && (
-          <Card className="mt-8 glass-card">
+          <Card className="mt-8 glass-card animate-fade-in">
             <CardHeader>
               <CardTitle>{t('forecastResult')}</CardTitle>
             </CardHeader>
@@ -172,7 +172,7 @@ export default function ForecastClient({ forecastAction, explainAction }: Foreca
 
             </CardContent>
             {explanation && (
-                <CardFooter>
+                <CardFooter className="animate-fade-in">
                     <div className="w-full space-y-2">
                         <h3 className="font-semibold flex items-center gap-2 text-lg"><Sparkles className="h-5 w-5 text-accent" /> {t('aiExplanation')}</h3>
                         <p className="text-muted-foreground bg-black/20 p-4 rounded-md text-base">{explanation}</p>

@@ -30,7 +30,7 @@ export function Header() {
   const currentRole = ROLES.find(r => r.value === role);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/10 bg-background/30 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 w-full border-b border-border/10 bg-background/30 backdrop-blur-lg animate-fade-in-down">
       <div className="container flex h-16 items-center">
         <div className="mr-6 hidden md:flex">
           <Link href="/dashboard" className="flex items-center gap-2">
@@ -90,9 +90,9 @@ export function Header() {
         <div className="flex flex-1 items-center justify-end space-x-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-40 justify-start bg-transparent hover:bg-accent">
+              <Button variant="outline" className="w-full sm:w-40 justify-start bg-transparent hover:bg-accent">
                 {currentRole && <currentRole.icon className="mr-2 h-4 w-4 text-primary/80" />}
-                {currentRole?.label}
+                <span className="hidden sm:inline">{currentRole?.label}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-background/80 backdrop-blur-xl border-border/10">

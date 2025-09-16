@@ -49,7 +49,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="transition-all duration-300">
+    <div className="transition-all duration-300 animate-fade-in-up">
       {renderDashboard()}
     </div>
   );

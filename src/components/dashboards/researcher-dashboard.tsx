@@ -1,20 +1,28 @@
 'use client';
-import { FlaskConical, Database, FileText, BrainCircuit } from 'lucide-react';
+import { FlaskConical, Database, FileText, BrainCircuit, ArrowRight } from 'lucide-react';
 import { useApp } from '@/contexts/app-provider';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Link from 'next/link';
 
 const sampleData = [
-  { name: 'Region A', uv: 4000, pv: 2400, amt: 2400 },
-  { name: 'Region B', uv: 3000, pv: 1398, amt: 2210 },
-  { name: 'Region C', uv: 2000, pv: 9800, amt: 2290 },
-  { name: 'Region D', uv: 2780, pv: 3908, amt: 2000 },
-  { name: 'Region E', uv: 1890, pv: 4800, amt: 2181 },
+  { name: 'Region A', 'Aquifer Level': 4000, 'Rainfall (mm)': 2400 },
+  { name: 'Region B', 'Aquifer Level': 3000, 'Rainfall (mm)': 1398 },
+  { name: 'Region C', 'Aquifer Level': 2000, 'Rainfall (mm)': 9800 },
+  { name: 'Region D', 'Aquifer Level': 2780, 'Rainfall (mm)': 3908 },
+  { name: 'Region E', 'Aquifer Level': 1890, 'Rainfall (mm)': 4800 },
+  { name: 'Region F', 'Aquifer Level': 2390, 'Rainfall (mm)': 3800 },
+  { name: 'Region G', 'Aquifer Level': 3490, 'Rainfall (mm)': 4300 },
 ];
 
 export default function ResearcherDashboard() {
   const { t } = useApp();
+
+  const toolCards = [
+    { href: "/forecast", icon: BrainCircuit, title: "AI Forecasting Model", description: "Predict future water availability." },
+    { href: "#", icon: Database, title: "Download Raw Data", description: "Access comprehensive datasets." },
+    { href: "#", icon: FileText, title: "Published Papers", description: "Browse relevant research papers." },
+  ];
 
   return (
     <div className="container py-8">
@@ -25,57 +33,55 @@ export default function ResearcherDashboard() {
         <p className="text-muted-foreground mt-4 max-w-2xl">{t('researcherIntro')}</p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-            <Card className="glass-card">
-              <CardHeader>
-                <CardTitle>Comparative Regional Analysis</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={sampleData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsla(var(--border), 0.5)" />
-                    <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" />
-                    <YAxis stroke="hsl(var(--muted-foreground))" />
-                    <Tooltip
-                        contentStyle={{
-                            backgroundColor: "hsl(var(--background))",
-                            border: "1px solid hsl(var(--border))",
-                            borderRadius: "var(--radius)",
-                            backdropFilter: 'blur(10px)',
-                        }}
-                        cursor={{ fill: 'hsla(var(--primary), 0.1)' }}
-                    />
-                    <Legend wrapperStyle={{ color: "hsl(var(--foreground))" }}/>
-                    <Bar dataKey="pv" fill="hsl(var(--chart-1))" name="Aquifer Level" />
-                    <Bar dataKey="uv" fill="hsl(var(--chart-2))" name="Rainfall (mm)" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-        </div>
+      <div className="grid gap-6">
+        <Card className="glass-card">
+          <CardHeader>
+            <CardTitle>Comparative Regional Analysis</CardTitle>
+            <CardDescription>Comparing aquifer levels and rainfall across different regions.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={350}>
+              <BarChart data={sampleData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsla(var(--border), 0.5)" />
+                <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" />
+                <YAxis yAxisId="left" orientation="left" stroke="hsl(var(--chart-1))" />
+                <YAxis yAxisId="right" orientation="right" stroke="hsl(var(--chart-2))" />
+                <Tooltip
+                    contentStyle={{
+                        backgroundColor: "hsl(var(--background) / 0.8)",
+                        border: "1px solid hsl(var(--border))",
+                        borderRadius: "var(--radius)",
+                        backdropFilter: 'blur(10px)',
+                    }}
+                    cursor={{ fill: 'hsla(var(--primary), 0.1)' }}
+                />
+                <Legend wrapperStyle={{ color: "hsl(var(--foreground))", paddingTop: '20px' }}/>
+                <Bar yAxisId="left" dataKey="Aquifer Level" fill="hsl(var(--chart-1))" radius={[4, 4, 0, 0]} />
+                <Bar yAxisId="right" dataKey="Rainfall (mm)" fill="hsl(var(--chart-2))" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
 
-        <div className="space-y-6">
-            <Link href="/forecast">
-                <Card className="glass-card hover:border-primary/50 transition-all">
-                    <CardHeader className="flex-row items-center gap-4 space-y-0">
-                        <BrainCircuit className="w-8 h-8 text-primary" />
-                        <CardTitle>AI Forecasting Model</CardTitle>
-                    </CardHeader>
-                </Card>
+        <div className="grid gap-6 md:grid-cols-3">
+          {toolCards.map((tool, index) => (
+            <Link href={tool.href} key={index}>
+              <Card className="glass-card h-full group hover:border-primary/50 transition-all duration-300 hover:scale-105 flex flex-col">
+                  <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="p-3 rounded-lg bg-secondary">
+                          <tool.icon className="w-8 h-8 text-primary" />
+                        </div>
+                        <ArrowRight className="text-muted-foreground group-hover:text-primary transition-transform group-hover:translate-x-1" />
+                      </div>
+                  </CardHeader>
+                  <CardContent>
+                    <CardTitle>{tool.title}</CardTitle>
+                    <CardDescription className="mt-2">{tool.description}</CardDescription>
+                  </CardContent>
+              </Card>
             </Link>
-             <Card className="glass-card">
-                <CardHeader className="flex-row items-center gap-4 space-y-0">
-                    <Database className="w-8 h-8 text-accent" />
-                    <CardTitle>Download Raw Data</CardTitle>
-                </CardHeader>
-            </Card>
-             <Card className="glass-card">
-                <CardHeader className="flex-row items-center gap-4 space-y-0">
-                    <FileText className="w-8 h-8 text-secondary-foreground" />
-                    <CardTitle>Published Papers</CardTitle>
-                </CardHeader>
-            </Card>
+          ))}
         </div>
       </div>
     </div>

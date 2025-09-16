@@ -1,16 +1,16 @@
 'use client';
-import { Landmark, AreaChart, PieChart, Users, FileText } from 'lucide-react';
+import { Landmark, AreaChart, PieChart, Users, FileText, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { useApp } from '@/contexts/app-provider';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { ResponsiveContainer, AreaChart as RechartsAreaChart, XAxis, YAxis, Tooltip, Area, PieChart as RechartsPieChart, Pie, Cell, Legend } from 'recharts';
 
 const waterUsageData = [
-  { name: 'Jan', usage: 400 },
-  { name: 'Feb', usage: 300 },
-  { name: 'Mar', usage: 500 },
-  { name: 'Apr', usage: 450 },
-  { name: 'May', usage: 600 },
-  { name: 'Jun', usage: 550 },
+  { name: 'Jan', usage: 4000 },
+  { name: 'Feb', usage: 3000 },
+  { name: 'Mar', usage: 5000 },
+  { name: 'Apr', usage: 4500 },
+  { name: 'May', usage: 6000 },
+  { name: 'Jun', usage: 5500 },
 ];
 
 const policyComplianceData = [
@@ -20,6 +20,13 @@ const policyComplianceData = [
 
 export default function GovernmentDashboard() {
   const { t } = useApp();
+  
+  const kpiCards = [
+      { title: "Total Monitored Regions", value: "1,254", change: "+12 since last month", icon: Landmark },
+      { title: "Active Alerts", value: "83", change: "Critical levels in 15 regions", icon: AlertTriangle, color: "text-yellow-400" },
+      { title: "Farmers Enrolled", value: "28,493", change: "+2,104 this quarter", icon: Users },
+      { title: "Policy Initiatives", value: "12 Active", change: "2 new policies launched", icon: FileText },
+  ]
 
   return (
     <div className="container py-8">
@@ -31,53 +38,25 @@ export default function GovernmentDashboard() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="glass-card">
-            <CardHeader className="flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Total Monitored Regions</CardTitle>
-                <Landmark className="w-4 h-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-                <div className="text-2xl font-bold">1,254</div>
-                <p className="text-xs text-muted-foreground">+12 since last month</p>
-            </CardContent>
-        </Card>
-        <Card className="glass-card">
-            <CardHeader className="flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Active Alerts</CardTitle>
-                <AreaChart className="w-4 h-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-                <div className="text-2xl font-bold text-yellow-400">83</div>
-                <p className="text-xs text-muted-foreground">Critical levels in 15 regions</p>
-            </CardContent>
-        </Card>
-        <Card className="glass-card">
-            <CardHeader className="flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Farmers Enrolled</CardTitle>
-                <Users className="w-4 h-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-                <div className="text-2xl font-bold">28,493</div>
-                <p className="text-xs text-muted-foreground">+2,104 this quarter</p>
-            </CardContent>
-        </Card>
-        <Card className="glass-card">
-            <CardHeader className="flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Reports Generated</CardTitle>
-                <FileText className="w-4 h-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-                <div className="text-2xl font-bold">431</div>
-                <p className="text-xs text-muted-foreground">View and download reports</p>
-            </CardContent>
-        </Card>
+        {kpiCards.map((card, index) => (
+            <Card key={index} className="glass-card">
+                <CardHeader className="flex-row items-center justify-between pb-2">
+                    <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
+                    <card.icon className="w-4 h-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                    <div className={`text-2xl font-bold ${card.color || ''}`}>{card.value}</div>
+                    <p className="text-xs text-muted-foreground">{card.change}</p>
+                </CardContent>
+            </Card>
+        ))}
       </div>
 
       <div className="grid gap-6 md:grid-cols-5 mt-6">
         <Card className="glass-card md:col-span-3">
             <CardHeader>
                 <CardTitle>Regional Water Usage Trend</CardTitle>
-                <CardDescription>Monthly water consumption across all regions.</CardDescription>
+                <CardDescription>Monthly water consumption (in million cubic meters).</CardDescription>
             </CardHeader>
             <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -92,7 +71,7 @@ export default function GovernmentDashboard() {
                         <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12}/>
                         <Tooltip
                             contentStyle={{
-                                backgroundColor: "hsl(var(--background))",
+                                backgroundColor: "hsl(var(--background) / 0.8)",
                                 border: "1px solid hsl(var(--border))",
                                 backdropFilter: 'blur(10px)',
                             }}
@@ -111,15 +90,15 @@ export default function GovernmentDashboard() {
                  <ResponsiveContainer width="100%" height={300}>
                     <RechartsPieChart>
                         <Pie data={policyComplianceData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} labelLine={false} label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
-                            const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
+                            const radius = innerRadius + (outerRadius - innerRadius) * 1.3;
                             const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
                             const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
-                            return (<text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" >
+                            return (<text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" className="text-sm font-bold">
                                 {`${(percent * 100).toFixed(0)}%`}
                             </text>);
                         }}>
                         {policyComplianceData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
+                            <Cell key={`cell-${index}`} fill={entry.color} className="transition-all duration-300 hover:opacity-80" stroke="hsl(var(--background))" strokeWidth={2}/>
                         ))}
                         </Pie>
                         <Legend iconType="circle" />
