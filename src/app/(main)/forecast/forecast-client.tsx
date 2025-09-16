@@ -97,8 +97,8 @@ export default function ForecastClient({ forecastAction, explainAction }: Foreca
     <div className="container py-8 animate-fade-in-up">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">{t('aiForecast')}</h1>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">{t('forecastDescription')}</p>
+          <h1 className="text-3xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">{t('aiForecast')}</h1>
+          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-sm sm:text-base">{t('forecastDescription')}</p>
         </div>
 
         <Card className="glass-card">
@@ -128,7 +128,7 @@ export default function ForecastClient({ forecastAction, explainAction }: Foreca
                 <FormField control={form.control} name="dwlrData" render={({ field }) => (
                   <FormItem><FormLabel>{t('dwlrData')}</FormLabel><FormControl><Textarea placeholder={t('dwlrPlaceholder')} {...field} className="bg-transparent/20" /></FormControl><FormMessage /></FormItem>
                 )} />
-                <Button type="submit" disabled={isLoading} size="lg" className="bg-primary/90 hover:bg-primary text-primary-foreground font-bold">
+                <Button type="submit" disabled={isLoading} size="lg" className="bg-primary/90 hover:bg-primary text-primary-foreground font-bold w-full sm:w-auto">
                   {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <BrainCircuit className="mr-2 h-4 w-4" />}
                   {t('getForecast')}
                 </Button>
@@ -152,11 +152,11 @@ export default function ForecastClient({ forecastAction, explainAction }: Foreca
             <CardContent className="space-y-6">
               <div className="space-y-2">
                 <h3 className="font-semibold flex items-center gap-2 text-lg"><BarChart className="h-5 w-5 text-primary" /> Forecast</h3>
-                <p className="text-muted-foreground bg-black/20 p-4 rounded-md text-base">{forecastResult.forecast}</p>
+                <p className="text-muted-foreground bg-black/20 p-4 rounded-md text-sm sm:text-base">{forecastResult.forecast}</p>
               </div>
               <div className="space-y-2">
                 <h3 className="font-semibold flex items-center gap-2 text-lg"><FileText className="h-5 w-5 text-primary" /> Summary</h3>
-                <p className="text-muted-foreground">{forecastResult.explanation}</p>
+                <p className="text-muted-foreground text-sm sm:text-base">{forecastResult.explanation}</p>
               </div>
               <div>
                 <h3 className="font-semibold mb-2 text-lg">{t('confidence')}</h3>
@@ -164,7 +164,7 @@ export default function ForecastClient({ forecastAction, explainAction }: Foreca
               </div>
               
               {!explanation && (
-                <Button variant="secondary" onClick={handleGetExplanation} disabled={isExplainLoading} className="bg-white/10 hover:bg-white/20 text-foreground">
+                <Button variant="secondary" onClick={handleGetExplanation} disabled={isExplainLoading} className="bg-white/10 hover:bg-white/20 text-foreground w-full sm:w-auto">
                   {isExplainLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
                   {t('getExplanation')}
                 </Button>
@@ -175,7 +175,7 @@ export default function ForecastClient({ forecastAction, explainAction }: Foreca
                 <CardFooter className="animate-fade-in">
                     <div className="w-full space-y-2">
                         <h3 className="font-semibold flex items-center gap-2 text-lg"><Sparkles className="h-5 w-5 text-accent" /> {t('aiExplanation')}</h3>
-                        <p className="text-muted-foreground bg-black/20 p-4 rounded-md text-base">{explanation}</p>
+                        <p className="text-muted-foreground bg-black/20 p-4 rounded-md text-sm sm:text-base">{explanation}</p>
                     </div>
                 </CardFooter>
             )}

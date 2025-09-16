@@ -28,10 +28,10 @@ export default function MapPage() {
   return (
     <div className="container py-8 animate-fade-in-up">
       <div className="mb-8 text-center">
-        <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
+        <h1 className="text-3xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
             {t('mapDashboard')}
         </h1>
-        <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">{t('mapDescription')}</p>
+        <p className="text-muted-foreground mt-4 max-w-3xl mx-auto text-sm sm:text-base">{t('mapDescription')}</p>
       </div>
       <Card className="glass-card overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-4">
@@ -75,7 +75,7 @@ export default function MapPage() {
                                 size="sm"
                                 onClick={() => setActiveLayer(layer.id)}
                                 className={cn(
-                                    "flex flex-col h-20 justify-center items-center gap-1 transition-all duration-200",
+                                    "flex flex-col h-20 justify-center items-center gap-1 transition-all duration-200 text-xs sm:text-sm",
                                     activeLayer === layer.id ? 'bg-primary text-primary-foreground scale-105 shadow-lg' : 'bg-transparent text-muted-foreground hover:bg-white/5 hover:text-white'
                                 )}
                             >

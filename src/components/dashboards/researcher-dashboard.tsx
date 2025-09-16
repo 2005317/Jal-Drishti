@@ -1,5 +1,5 @@
 'use client';
-import { FlaskConical, Database, FileText, BrainCircuit, ArrowRight } from 'lucide-react';
+import { Database, FileText, BrainCircuit, ArrowRight } from 'lucide-react';
 import { useApp } from '@/contexts/app-provider';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -27,10 +27,10 @@ export default function ResearcherDashboard() {
   return (
     <div className="container py-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
+        <h1 className="text-3xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
           {t('researcherDashboard')}
         </h1>
-        <p className="text-muted-foreground mt-4 max-w-2xl">{t('researcherIntro')}</p>
+        <p className="text-muted-foreground mt-4 max-w-2xl text-sm sm:text-base">{t('researcherIntro')}</p>
       </div>
 
       <div className="grid gap-6">
@@ -43,9 +43,9 @@ export default function ResearcherDashboard() {
             <ResponsiveContainer width="100%" height={350}>
               <BarChart data={sampleData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsla(var(--border), 0.5)" />
-                <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" />
-                <YAxis yAxisId="left" orientation="left" stroke="hsl(var(--chart-1))" />
-                <YAxis yAxisId="right" orientation="right" stroke="hsl(var(--chart-2))" />
+                <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                <YAxis yAxisId="left" orientation="left" stroke="hsl(var(--chart-1))" fontSize={12}/>
+                <YAxis yAxisId="right" orientation="right" stroke="hsl(var(--chart-2))" fontSize={12}/>
                 <Tooltip
                     contentStyle={{
                         backgroundColor: "hsl(var(--background) / 0.8)",

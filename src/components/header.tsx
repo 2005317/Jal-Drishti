@@ -39,7 +39,7 @@ export function Header() {
           </Link>
         </div>
         
-        <div className="md:hidden">
+        <div className="flex items-center md:hidden">
            <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -70,6 +70,11 @@ export function Header() {
               </nav>
             </SheetContent>
           </Sheet>
+           <div className="ml-2 md:hidden">
+              <Link href="/dashboard" className="flex items-center gap-2">
+                <Logo />
+              </Link>
+            </div>
         </div>
 
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
@@ -87,11 +92,11 @@ export function Header() {
           ))}
         </nav>
         
-        <div className="flex flex-1 items-center justify-end space-x-2">
+        <div className="flex flex-1 items-center justify-end space-x-1 sm:space-x-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full sm:w-40 justify-start bg-transparent hover:bg-accent">
-                {currentRole && <currentRole.icon className="mr-2 h-4 w-4 text-primary/80" />}
+              <Button variant="outline" className="w-10 sm:w-40 justify-center sm:justify-start bg-transparent hover:bg-accent">
+                {currentRole && <currentRole.icon className="sm:mr-2 h-4 w-4 text-primary/80" />}
                 <span className="hidden sm:inline">{currentRole?.label}</span>
               </Button>
             </DropdownMenuTrigger>

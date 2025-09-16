@@ -1,5 +1,5 @@
 'use client';
-import { Landmark, AreaChart, PieChart, Users, FileText, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Landmark, AlertTriangle, Users, FileText } from 'lucide-react';
 import { useApp } from '@/contexts/app-provider';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { ResponsiveContainer, AreaChart as RechartsAreaChart, XAxis, YAxis, Tooltip, Area, PieChart as RechartsPieChart, Pie, Cell, Legend } from 'recharts';
@@ -22,22 +22,22 @@ export default function GovernmentDashboard() {
   const { t } = useApp();
   
   const kpiCards = [
-      { title: "Total Monitored Regions", value: "1,254", change: "+12 since last month", icon: Landmark },
-      { title: "Active Alerts", value: "83", change: "Critical levels in 15 regions", icon: AlertTriangle, color: "text-yellow-400" },
+      { title: "Monitored Regions", value: "1,254", change: "+12 last month", icon: Landmark },
+      { title: "Active Alerts", value: "83", change: "15 critical regions", icon: AlertTriangle, color: "text-yellow-400" },
       { title: "Farmers Enrolled", value: "28,493", change: "+2,104 this quarter", icon: Users },
-      { title: "Policy Initiatives", value: "12 Active", change: "2 new policies launched", icon: FileText },
+      { title: "Policy Initiatives", value: "12 Active", change: "2 new launched", icon: FileText },
   ]
 
   return (
     <div className="container py-8">
        <div className="mb-8">
-        <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
+        <h1 className="text-3xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
           {t('governmentDashboard')}
         </h1>
-        <p className="text-muted-foreground mt-4 max-w-2xl">{t('govIntro')}</p>
+        <p className="text-muted-foreground mt-4 max-w-2xl text-sm sm:text-base">{t('govIntro')}</p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
         {kpiCards.map((card, index) => (
             <Card key={index} className="glass-card">
                 <CardHeader className="flex-row items-center justify-between pb-2">
@@ -45,8 +45,8 @@ export default function GovernmentDashboard() {
                     <card.icon className="w-4 h-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                    <div className={`text-2xl font-bold ${card.color || ''}`}>{card.value}</div>
-                    <p className="text-xs text-muted-foreground">{card.change}</p>
+                    <div className={`text-xl sm:text-2xl font-bold ${card.color || ''}`}>{card.value}</div>
+                    <p className="text-xs text-muted-foreground truncate">{card.change}</p>
                 </CardContent>
             </Card>
         ))}
@@ -55,8 +55,8 @@ export default function GovernmentDashboard() {
       <div className="grid gap-6 md:grid-cols-5 mt-6">
         <Card className="glass-card md:col-span-3">
             <CardHeader>
-                <CardTitle>Regional Water Usage Trend</CardTitle>
-                <CardDescription>Monthly water consumption (in million cubic meters).</CardDescription>
+                <CardTitle>Regional Water Usage</CardTitle>
+                <CardDescription>Monthly consumption (million m³).</CardDescription>
             </CardHeader>
             <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -83,8 +83,8 @@ export default function GovernmentDashboard() {
         </Card>
         <Card className="glass-card md:col-span-2">
             <CardHeader>
-                <CardTitle>Policy Compliance Rate</CardTitle>
-                <CardDescription>Adherence to water conservation policies.</CardDescription>
+                <CardTitle>Policy Compliance</CardTitle>
+                <CardDescription>Adherence to water policies.</CardDescription>
             </CardHeader>
             <CardContent>
                  <ResponsiveContainer width="100%" height={300}>
@@ -101,7 +101,7 @@ export default function GovernmentDashboard() {
                             <Cell key={`cell-${index}`} fill={entry.color} className="transition-all duration-300 hover:opacity-80" stroke="hsl(var(--background))" strokeWidth={2}/>
                         ))}
                         </Pie>
-                        <Legend iconType="circle" />
+                        <Legend iconType="circle" wrapperStyle={{ fontSize: '12px' }} />
                     </RechartsPieChart>
                 </ResponsiveContainer>
             </CardContent>

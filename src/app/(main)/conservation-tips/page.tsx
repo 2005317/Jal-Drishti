@@ -30,8 +30,8 @@ export default function ConservationTipsPage() {
   return (
     <div className="container py-8 animate-fade-in-up">
       <div className="mb-8 text-center">
-        <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">{t('tipsTitle')}</h1>
-        <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+        <h1 className="text-3xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">{t('tipsTitle')}</h1>
+        <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-sm sm:text-base">
             Actionable advice, optimized for your geographic region, to help you conserve water and improve sustainability.
         </p>
       </div>

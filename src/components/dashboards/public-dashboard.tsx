@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, AreaChart, Area } from "recharts";
+import { ResponsiveContainer, XAxis, YAxis, Tooltip, AreaChart, Area } from "recharts";
 import { useApp } from '@/contexts/app-provider';
 import { cn } from '@/lib/utils';
 import { AlertTriangle, ShieldCheck, TrendingDown, MapPin } from 'lucide-react';
@@ -39,10 +39,10 @@ export default function PublicDashboard() {
   return (
     <div className="container py-8">
       <div className="mb-8 text-center">
-        <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
+        <h1 className="text-3xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
           {t('groundwaterHealth')}
         </h1>
-        <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+        <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-sm sm:text-base">
           {t('publicIntro')}
         </p>
       </div>
@@ -63,17 +63,17 @@ export default function PublicDashboard() {
               </SelectContent>
             </Select>
 
-            <div className="relative w-40 h-40">
-                <div className={`w-40 h-40 rounded-full flex items-center justify-center ${statusInfo.bgColor} animate-pulse-slow`}>
-                    <div className={`w-32 h-32 rounded-full flex items-center justify-center ${statusInfo.bgColor}`}>
-                        <span className={cn("font-bold text-5xl", statusInfo.color)}>{currentHealth.value}</span>
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40">
+                <div className={`w-full h-full rounded-full flex items-center justify-center ${statusInfo.bgColor} animate-pulse-slow`}>
+                    <div className={`w-[85%] h-[85%] rounded-full flex items-center justify-center ${statusInfo.bgColor}`}>
+                        <span className={cn("font-bold text-4xl sm:text-5xl", statusInfo.color)}>{currentHealth.value}</span>
                     </div>
                 </div>
             </div>
             
             <div>
-              <p className="text-xl font-bold flex items-center justify-center gap-2"><MapPin className="text-primary size-5"/> {currentHealth.label}</p>
-              <div className={cn("text-lg font-semibold flex items-center justify-center gap-2 mt-1", statusInfo.color)}>
+              <p className="text-lg sm:text-xl font-bold flex items-center justify-center gap-2"><MapPin className="text-primary size-5"/> {currentHealth.label}</p>
+              <div className={cn("text-base sm:text-lg font-semibold flex items-center justify-center gap-2 mt-1", statusInfo.color)}>
                 {statusInfo.icon} {statusInfo.text}
               </div>
             </div>
@@ -82,8 +82,8 @@ export default function PublicDashboard() {
 
         <Card className="glass-card md:col-span-2">
           <CardHeader>
-            <CardTitle>Historical Levels (Last 6 Months)</CardTitle>
-            <CardDescription>Groundwater availability percentage over time for {currentHealth.label}.</CardDescription>
+            <CardTitle>Historical Levels (6 Months)</CardTitle>
+            <CardDescription>Groundwater availability for {currentHealth.label}.</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>

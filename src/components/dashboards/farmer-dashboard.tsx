@@ -38,10 +38,10 @@ export default function FarmerDashboard() {
   return (
     <div className="container py-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 dark:from-primary dark:to-white/60">
+        <h1 className="text-3xl font-black tracking-tighter sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 dark:from-primary dark:to-white/60">
             {t('farmerDashboard')}
         </h1>
-        <p className="text-muted-foreground mt-4 max-w-2xl">
+        <p className="text-muted-foreground mt-4 max-w-2xl text-sm sm:text-base">
           Actionable insights to help you manage water resources effectively and improve crop yield.
         </p>
       </div>
@@ -57,11 +57,11 @@ export default function FarmerDashboard() {
             <div className="flex items-center gap-4">
               {weather.icon}
               <div>
-                <div className="text-4xl font-bold">{weather.temp}</div>
-                <div className="text-lg text-muted-foreground">{weather.condition}</div>
+                <div className="text-3xl sm:text-4xl font-bold">{weather.temp}</div>
+                <div className="text-base sm:text-lg text-muted-foreground">{weather.condition}</div>
               </div>
             </div>
-            <div className="space-y-2 text-right text-sm">
+            <div className="space-y-2 text-right text-xs sm:text-sm">
                 <div className="flex items-center gap-2 justify-end"><Wind className="size-4 text-muted-foreground" /> {weather.wind}</div>
                 <div className="flex items-center gap-2 justify-end"><Thermometer className="size-4 text-muted-foreground" /> Humidity: {weather.humidity}</div>
             </div>
@@ -75,7 +75,7 @@ export default function FarmerDashboard() {
             <CardDescription>Weekly change</CardDescription>
           </CardHeader>
           <CardContent className="flex items-end justify-between gap-2">
-            <div className="text-4xl font-bold">{waterLevel.current}<span className="text-xl text-muted-foreground">%</span></div>
+            <div className="text-3xl sm:text-4xl font-bold">{waterLevel.current}<span className="text-lg sm:text-xl text-muted-foreground">%</span></div>
             <div className={`flex items-center gap-1 font-bold ${waterLevel.isIncreasing ? 'text-green-500' : 'text-red-500'}`}>
               {waterLevel.isIncreasing ? <TrendingUp /> : <TrendingDown />}
               <span>{waterLevel.change}%</span>
@@ -88,10 +88,10 @@ export default function FarmerDashboard() {
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-2 gap-4">
+          <CardContent className="grid grid-cols-2 gap-2 sm:gap-4">
             {quickActions.map(action => (
               <Link href={action.href} key={action.title}>
-                <Button variant="outline" className="w-full h-24 flex-col gap-2 bg-transparent hover:bg-primary/10 transition-all hover:scale-105 p-2">
+                <Button variant="outline" className="w-full h-20 sm:h-24 flex-col gap-1 sm:gap-2 bg-transparent hover:bg-primary/10 transition-all hover:scale-105 p-2">
                   {action.icon}
                   <span className="text-xs text-center leading-tight">{action.title}</span>
                 </Button>
@@ -138,7 +138,7 @@ export default function FarmerDashboard() {
         <Card className="glass-card flex flex-col md:col-span-2">
           <CardHeader>
             <CardTitle>{t('cropWaterNeeds')}</CardTitle>
-            <CardDescription>Recommendations for your primary crop: Wheat</CardDescription>
+            <CardDescription>For your primary crop: Wheat</CardDescription>
           </CardHeader>
           <CardContent className="flex-grow">
             <div className="bg-primary/10 p-4 rounded-lg flex items-start gap-4">
@@ -151,7 +151,7 @@ export default function FarmerDashboard() {
           <CardFooter>
             <Button className="w-full transition-all hover:scale-105">
               <Calendar className="mr-2"/>
-              View Detailed Irrigation Schedule
+              View Irrigation Schedule
             </Button>
           </CardFooter>
         </Card>
