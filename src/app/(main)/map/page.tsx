@@ -4,12 +4,13 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useApp } from '@/contexts/app-provider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Layers, Droplets, Thermometer, Wind, ZoomIn, ZoomOut, Maximize } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const layers = [
   { id: 'groundwater', name: 'Groundwater', icon: <Droplets /> },
@@ -24,6 +25,37 @@ export default function MapPage() {
   const [activeLayer, setActiveLayer] = useState('groundwater');
   const [timeframe, setTimeframe] = useState('realtime');
   const [zoom, setZoom] = useState(1);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="container py-8 animate-fade-in-up">
+        <div className="mb-8 text-center">
+          <Skeleton className="h-12 w-3/4 mx-auto mb-4" />
+          <Skeleton className="h-6 w-1/2 mx-auto" />
+        </div>
+        <Card className="glass-card overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-4">
+            <div className="lg:col-span-3 p-2">
+              <Skeleton className="w-full h-[400px] md:h-[600px] rounded-md" />
+            </div>
+            <div className="lg:col-span-1 p-6 bg-black/10">
+              <Skeleton className="h-8 w-32 mb-6" />
+              <div className="space-y-6">
+                <Skeleton className="h-24 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-10 w-full" />
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="container py-8 animate-fade-in-up">
