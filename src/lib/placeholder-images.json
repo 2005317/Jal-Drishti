@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "map-dashboard",
+      "description": "A satellite map of India showing various data layers for water management.",
+      "imageUrl": "https://picsum.photos/seed/map1/1200/800",
+      "imageHint": "india map"
+    },
+    {
+      "id": "crop-water-needs",
+      "description": "An icon representing water needs for crops, like a wheat stalk with a water drop.",
+      "imageUrl": "https://picsum.photos/seed/crop1/200/200",
+      "imageHint": "wheat field"
+    },
+    {
+      "id": "irrigation-recommendations",
+      "description": "An icon representing irrigation, like a sprinkler system over a field.",
+      "imageUrl": "https://picsum.photos/seed/irrigation1/200/200",
+      "imageHint": "irrigation field"
+    },
+    {
+      "id": "groundwater-forecast",
+      "description": "An icon representing a forecast, like a chart with an upward or downward trend.",
+      "imageUrl": "https://picsum.photos/seed/forecast1/200/200",
+      "imageHint": "data chart"
+    }
+  ]
 }
